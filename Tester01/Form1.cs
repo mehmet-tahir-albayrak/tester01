@@ -1895,6 +1895,7 @@ namespace Tester01
 		}
 		/* log post*/
 		public string UID = "D00130222113";
+		
 		private void JsonPost_Click(object sender, EventArgs e)
 		{
 
@@ -1915,35 +1916,36 @@ namespace Tester01
 				
 				for (int i = 0; i < j; i++)
 				{
-                    
-                    {
-						
-                        JsonEventLog[] logs = new JsonEventLog[i == jsonDatas.Length ? balance : 16];
-                        Array.Copy(jsonDatas, i * (i == jsonDatas.Length ? balance : 16), logs, 0, i == jsonDatas.Length ? balance : 16);
-                        string strData = JsonConvert.SerializeObject(logs);
-
-                        byte[] datas = Encoding.ASCII.GetBytes(strData);
-
-                        if (strData.Length != 0)
-                        {
+					
+					JsonEventLog[] logs = new JsonEventLog[i == j - 1 ? balance : 16];
+					Array.Copy(jsonDatas, i * 16, logs, 0, i == j - 1 ? balance : 16);
+					for (int n = 0; n < logs.Length; n++)
+					{
 
 
-                            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://ats.isina.com.tr/rs/rest/events/");
-                            request.ContentType = "application/json";
-                            request.Headers.Add("Authorization", "Bearer " + access_token);
-                            request.Method = "POST";
+						string strData = JsonConvert.SerializeObject(logs[n]);
 
-                            request.ContentLength = datas.Length;
-                            using (var stream = request.GetRequestStream())
-                            {
-                                stream.Write(datas, 0, datas.Length);
-                            }
+						byte[] datas = Encoding.ASCII.GetBytes(strData);
 
-                            var response = (HttpWebResponse)request.GetResponse();
+						if (strData.Length != 0)
+						{
 
-                            var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
 
-                        }
+							HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://ats.isina.com.tr/rs/rest/events/");
+							request.ContentType = "application/json";
+							request.Headers.Add("Authorization", "Bearer " + access_token);
+							request.Method = "POST";
+
+							request.ContentLength = datas.Length;
+							using (var stream = request.GetRequestStream())
+							{
+								stream.Write(datas, 0, datas.Length);
+							}
+
+							var response = (HttpWebResponse)request.GetResponse();
+
+							var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+						}
                     }
                 }
 			}
@@ -1954,11 +1956,12 @@ namespace Tester01
 		}
 		/************************************************************************************************************************************************************************************************************************************************************************************/
 
-
 		/****************************************************************DATA LOG POST *****************************************************************************************************************************************/
-	 int GetDataLogs(out JsonDataLog[] logs)
+		int GetDataLogs(out JsonDataLog[] logs)
 		{
-		   logs = new JsonDataLog[1];
+			const int DATA_LOG_ENTRY_LEN = 8;
+			byte[] raw_data_log = new byte[DATA_LOG_ENTRY_LEN];
+			logs = new JsonDataLog[1];
 					try
 					{
 						VaccPort.Open();
@@ -1985,9 +1988,10 @@ namespace Tester01
 								if (GetResponse(VaccPort, Commands.UsbCmd, Commands.USB_GET_DATA_LOG, out rsp, out length))
 								{
 									{
-										for (int i = 0; i < length; i += 6)
+										for (int i = 0; i < length; i += DATA_LOG_ENTRY_LEN)
 										{
-											Data_Log_parser( rsp, out uint epoch, out int door_open, out int on_power, out double ref_temp, out double in_temp, out double ex_temp );
+											Array.Copy(rsp, 8 * i, raw_data_log, 0, DATA_LOG_ENTRY_LEN);
+											Data_Log_parser(raw_data_log, out uint epoch, out int door_open, out int on_power, out double ref_temp, out double in_temp, out double ex_temp );
 
 											logs[DatalogIndex++] = new JsonDataLog()
 											{
@@ -2069,7 +2073,7 @@ namespace Tester01
                     {
 
                         string strData = JsonConvert.SerializeObject(logs[n]);
-
+						dataLogTxtBox.AppendText(strData) ;
                         byte[] datas = Encoding.ASCII.GetBytes(strData);
 
                         if (strData.Length != 0)
