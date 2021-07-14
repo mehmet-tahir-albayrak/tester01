@@ -38,7 +38,7 @@ namespace Tester01
 		Queue<string> data_log_queue = new Queue<string>();
 		static object Lock = new object();
 		private HttpClient client = new HttpClient();
-		private string device_uid = "";
+		private string device_uid = "D00130222113";
 		private DateTime startTime;
 		private int MAX_CHART2_INDEX = 100;
 
@@ -1686,7 +1686,7 @@ namespace Tester01
 				datas = null;
 				return 0;
 			}
-			return 0;
+		
 		}
 
 
@@ -1894,7 +1894,7 @@ namespace Tester01
 			}
 		}
 		/* log post*/
-		public string UID = "E00630222113";
+		public string UID = "D00130222113";
 		private void JsonPost_Click(object sender, EventArgs e)
 		{
 
@@ -1909,40 +1909,45 @@ namespace Tester01
 
 			try
 			{
-				int balance = jsonDatas.Length % 50;
-				int j = ((jsonDatas.Length / 50) + (balance > 0 ? 1 : 0));
 				string access_token = getToken();
+				int balance = jsonDatas.Length % 50;
+				int j = ((jsonDatas.Length / 16) + (balance > 0 ? 1 : 0));
+				
 				for (int i = 0; i < j; i++)
 				{
-					JsonEventLog[] logs = new JsonEventLog[i==jsonDatas.Length?balance:50];
-					Array.Copy(jsonDatas,i*(i==jsonDatas.Length ? balance : 50),logs,0, i == jsonDatas.Length ? balance : 50);
-					string strData = JsonConvert.SerializeObject(logs);
-
-					byte[] datas = Encoding.ASCII.GetBytes(strData);
-
-					if (strData.Length != 0)
-					{
+                    
+                    {
 						
+                        JsonEventLog[] logs = new JsonEventLog[i == jsonDatas.Length ? balance : 16];
+                        Array.Copy(jsonDatas, i * (i == jsonDatas.Length ? balance : 16), logs, 0, i == jsonDatas.Length ? balance : 16);
+                        string strData = JsonConvert.SerializeObject(logs);
 
-						HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://ats.isina.com.tr/rs/rest/events/");
-						request.ContentType = "application/json";
-						request.Headers.Add("Authorization", "Bearer " + access_token);
-						request.Method = "POST";
+                        byte[] datas = Encoding.ASCII.GetBytes(strData);
 
-						request.ContentLength = datas.Length;
-						using (var stream = request.GetRequestStream())
-						{
-							stream.Write(datas, 0, datas.Length);
-						}
+                        if (strData.Length != 0)
+                        {
 
-						var response = (HttpWebResponse)request.GetResponse();
 
-						var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+                            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://ats.isina.com.tr/rs/rest/events/");
+                            request.ContentType = "application/json";
+                            request.Headers.Add("Authorization", "Bearer " + access_token);
+                            request.Method = "POST";
 
-					} 
-				}
+                            request.ContentLength = datas.Length;
+                            using (var stream = request.GetRequestStream())
+                            {
+                                stream.Write(datas, 0, datas.Length);
+                            }
+
+                            var response = (HttpWebResponse)request.GetResponse();
+
+                            var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+
+                        }
+                    }
+                }
 			}
-			catch (Exception)
+			catch (Exception ex)
 			{
 
 			}
@@ -2052,37 +2057,42 @@ namespace Tester01
 
 			try
 			{
-				int balance = jsonDatas.Length % 50;
-				int j = ((jsonDatas.Length / 50) + (balance > 0 ? 1 : 0));
+				int balance = jsonDatas.Length % 16;
+				int j = ((jsonDatas.Length / 16) + (balance > 0 ? 1 : 0));
 				string access_token = getToken();
+				
 				for (int i = 0; i < j; i++)
 				{
-					JsonEventLog[] logs = new JsonEventLog[i == jsonDatas.Length ? balance : 50];
-					Array.Copy(jsonDatas, i * (i == jsonDatas.Length ? balance : 50), logs, 0, i == jsonDatas.Length ? balance : 50);
-					string strData = JsonConvert.SerializeObject(logs);
+					JsonDataLog[] logs = new JsonDataLog[i == j -1 ? balance : 16];
+					Array.Copy(jsonDatas, i *  16, logs, 0, i == j -1 ? balance : 16);
+                    for (int n = 0; n < logs.Length; n++)
+                    {
 
-					byte[] datas = Encoding.ASCII.GetBytes(strData);
+                        string strData = JsonConvert.SerializeObject(logs[n]);
 
-					if (strData.Length != 0)
-					{
+                        byte[] datas = Encoding.ASCII.GetBytes(strData);
+
+                        if (strData.Length != 0)
+                        {
 
 
-						HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://ats.isina.com.tr/rs/rest/device-data/");
-						request.ContentType = "application/json";
-						request.Headers.Add("Authorization", "Bearer " + access_token);
-						request.Method = "POST";
+                            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://ats.isina.com.tr/rs/rest/device-data/");
+                            request.ContentType = "application/json";
+                            request.Headers.Add("Authorization", "Bearer " + access_token);
+                            request.Method = "POST";
 
-						request.ContentLength = datas.Length;
-						using (var stream = request.GetRequestStream())
-						{
-							stream.Write(datas, 0, datas.Length);
-						}
+                            request.ContentLength = datas.Length;
+                            using (var stream = request.GetRequestStream())
+                            {
+                                stream.Write(datas, 0, datas.Length);
+                            }
 
-						var response = (HttpWebResponse)request.GetResponse();
+                            var response = (HttpWebResponse)request.GetResponse();
 
-						var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+                            var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
 
-					}
+                        } 
+                    }
 				}
 			}
 			catch (Exception ex)
