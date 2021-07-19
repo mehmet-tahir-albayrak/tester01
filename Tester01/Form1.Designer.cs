@@ -76,13 +76,13 @@ namespace Tester01
             this.JsonDataPost = new System.Windows.Forms.Button();
             this.btnEpochSync = new System.Windows.Forms.Button();
             this.JsonPost = new System.Windows.Forms.Button();
+            this.LogTextBox = new System.Windows.Forms.RichTextBox();
             this.btnGetDataLogs = new System.Windows.Forms.Button();
             this.getpostjsonnetwork = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.DataPost = new System.Windows.Forms.TabPage();
-            this.LogTextBox = new System.Windows.Forms.RichTextBox();
             this.dataLogTxtBox = new System.Windows.Forms.RichTextBox();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -108,10 +108,10 @@ namespace Tester01
             this.pbMain,
             this.tsLblMain,
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(812, 537);
+            this.statusStrip1.Location = new System.Drawing.Point(9, 662);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 13, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(355, 26);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 10, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(277, 22);
             this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "statusStrip1";
             this.statusStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.statusStrip1_ItemClicked);
@@ -119,44 +119,45 @@ namespace Tester01
             // pbMain
             // 
             this.pbMain.Name = "pbMain";
-            this.pbMain.Size = new System.Drawing.Size(100, 18);
+            this.pbMain.Size = new System.Drawing.Size(75, 16);
             // 
             // tsLblMain
             // 
             this.tsLblMain.Name = "tsLblMain";
-            this.tsLblMain.Size = new System.Drawing.Size(86, 20);
+            this.tsLblMain.Size = new System.Drawing.Size(69, 17);
             this.tsLblMain.Text = "lMainStatus";
             this.tsLblMain.Click += new System.EventHandler(this.tsLblMain_Click);
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(151, 20);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
             this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             // 
             // lblSSID
             // 
             this.lblSSID.AutoSize = true;
-            this.lblSSID.Location = new System.Drawing.Point(19, 32);
+            this.lblSSID.Location = new System.Drawing.Point(14, 26);
+            this.lblSSID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSSID.Name = "lblSSID";
-            this.lblSSID.Size = new System.Drawing.Size(39, 17);
+            this.lblSSID.Size = new System.Drawing.Size(32, 13);
             this.lblSSID.TabIndex = 1;
             this.lblSSID.Text = "SSID";
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(81, 32);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox1.Location = new System.Drawing.Point(61, 26);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(167, 22);
+            this.textBox1.Size = new System.Drawing.Size(126, 20);
             this.textBox1.TabIndex = 2;
             // 
             // btnSsıdGet
             // 
-            this.btnSsıdGet.Location = new System.Drawing.Point(81, 89);
-            this.btnSsıdGet.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSsıdGet.Location = new System.Drawing.Point(61, 72);
+            this.btnSsıdGet.Margin = new System.Windows.Forms.Padding(2);
             this.btnSsıdGet.Name = "btnSsıdGet";
-            this.btnSsıdGet.Size = new System.Drawing.Size(167, 23);
+            this.btnSsıdGet.Size = new System.Drawing.Size(125, 19);
             this.btnSsıdGet.TabIndex = 3;
             this.btnSsıdGet.Text = "GET";
             this.btnSsıdGet.UseVisualStyleBackColor = true;
@@ -164,10 +165,10 @@ namespace Tester01
             // 
             // btnSsıdSet
             // 
-            this.btnSsıdSet.Location = new System.Drawing.Point(81, 60);
-            this.btnSsıdSet.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSsıdSet.Location = new System.Drawing.Point(61, 49);
+            this.btnSsıdSet.Margin = new System.Windows.Forms.Padding(2);
             this.btnSsıdSet.Name = "btnSsıdSet";
-            this.btnSsıdSet.Size = new System.Drawing.Size(167, 23);
+            this.btnSsıdSet.Size = new System.Drawing.Size(125, 19);
             this.btnSsıdSet.TabIndex = 3;
             this.btnSsıdSet.Text = "SET";
             this.btnSsıdSet.UseVisualStyleBackColor = true;
@@ -176,96 +177,101 @@ namespace Tester01
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 146);
+            this.label1.Location = new System.Drawing.Point(14, 119);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 17);
+            this.label1.Size = new System.Drawing.Size(28, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "PAS";
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(81, 146);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox2.Location = new System.Drawing.Point(61, 119);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(2);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(167, 22);
+            this.textBox2.Size = new System.Drawing.Size(126, 20);
             this.textBox2.TabIndex = 2;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(264, 38);
+            this.label2.Location = new System.Drawing.Point(198, 31);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(31, 17);
+            this.label2.Size = new System.Drawing.Size(26, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "UID";
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(327, 38);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox3.Location = new System.Drawing.Point(245, 31);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(2);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(167, 22);
+            this.textBox3.Size = new System.Drawing.Size(126, 20);
             this.textBox3.TabIndex = 2;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(8, 256);
+            this.label3.Location = new System.Drawing.Point(6, 208);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(21, 17);
+            this.label3.Size = new System.Drawing.Size(18, 13);
             this.label3.TabIndex = 1;
             this.label3.Text = "ID";
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(81, 256);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox4.Location = new System.Drawing.Point(61, 208);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(2);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(167, 22);
+            this.textBox4.Size = new System.Drawing.Size(126, 20);
             this.textBox4.TabIndex = 2;
             this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(264, 146);
+            this.label4.Location = new System.Drawing.Point(198, 119);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(36, 17);
+            this.label4.Size = new System.Drawing.Size(29, 13);
             this.label4.TabIndex = 1;
             this.label4.Text = "LDR";
             // 
             // textBox5
             // 
-            this.textBox5.Location = new System.Drawing.Point(327, 146);
-            this.textBox5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox5.Location = new System.Drawing.Point(245, 119);
+            this.textBox5.Margin = new System.Windows.Forms.Padding(2);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(167, 22);
+            this.textBox5.Size = new System.Drawing.Size(126, 20);
             this.textBox5.TabIndex = 2;
             // 
             // textBox6
             // 
-            this.textBox6.Location = new System.Drawing.Point(81, 284);
-            this.textBox6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox6.Location = new System.Drawing.Point(61, 231);
+            this.textBox6.Margin = new System.Windows.Forms.Padding(2);
             this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(167, 22);
+            this.textBox6.Size = new System.Drawing.Size(126, 20);
             this.textBox6.TabIndex = 2;
             this.textBox6.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(8, 284);
+            this.label5.Location = new System.Drawing.Point(6, 231);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(69, 17);
+            this.label5.Size = new System.Drawing.Size(55, 13);
             this.label5.TabIndex = 1;
             this.label5.Text = "VERSİON";
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(327, 76);
-            this.button4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button4.Location = new System.Drawing.Point(245, 62);
+            this.button4.Margin = new System.Windows.Forms.Padding(2);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(167, 23);
+            this.button4.Size = new System.Drawing.Size(125, 19);
             this.button4.TabIndex = 5;
             this.button4.Text = "set";
             this.button4.UseVisualStyleBackColor = true;
@@ -273,10 +279,10 @@ namespace Tester01
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(327, 105);
-            this.button9.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button9.Location = new System.Drawing.Point(245, 85);
+            this.button9.Margin = new System.Windows.Forms.Padding(2);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(167, 23);
+            this.button9.Size = new System.Drawing.Size(125, 19);
             this.button9.TabIndex = 5;
             this.button9.Text = "get";
             this.button9.UseVisualStyleBackColor = true;
@@ -284,10 +290,10 @@ namespace Tester01
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(81, 175);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button1.Location = new System.Drawing.Point(61, 142);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(167, 23);
+            this.button1.Size = new System.Drawing.Size(125, 19);
             this.button1.TabIndex = 6;
             this.button1.Text = "set";
             this.button1.UseVisualStyleBackColor = true;
@@ -295,10 +301,10 @@ namespace Tester01
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(81, 204);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button2.Location = new System.Drawing.Point(61, 166);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(167, 23);
+            this.button2.Size = new System.Drawing.Size(125, 19);
             this.button2.TabIndex = 7;
             this.button2.Text = "get";
             this.button2.UseVisualStyleBackColor = true;
@@ -306,10 +312,10 @@ namespace Tester01
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(327, 178);
-            this.button3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button3.Location = new System.Drawing.Point(245, 145);
+            this.button3.Margin = new System.Windows.Forms.Padding(2);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(167, 23);
+            this.button3.Size = new System.Drawing.Size(125, 19);
             this.button3.TabIndex = 8;
             this.button3.Text = "set";
             this.button3.UseVisualStyleBackColor = true;
@@ -317,10 +323,10 @@ namespace Tester01
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(327, 204);
-            this.button7.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button7.Location = new System.Drawing.Point(245, 166);
+            this.button7.Margin = new System.Windows.Forms.Padding(2);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(167, 23);
+            this.button7.Size = new System.Drawing.Size(125, 19);
             this.button7.TabIndex = 8;
             this.button7.Text = "get";
             this.button7.UseVisualStyleBackColor = true;
@@ -328,10 +334,10 @@ namespace Tester01
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(81, 313);
-            this.button5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button5.Location = new System.Drawing.Point(61, 254);
+            this.button5.Margin = new System.Windows.Forms.Padding(2);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(167, 23);
+            this.button5.Size = new System.Drawing.Size(125, 19);
             this.button5.TabIndex = 9;
             this.button5.Text = "SET";
             this.button5.UseVisualStyleBackColor = true;
@@ -339,10 +345,10 @@ namespace Tester01
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(81, 343);
-            this.button6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button6.Location = new System.Drawing.Point(61, 279);
+            this.button6.Margin = new System.Windows.Forms.Padding(2);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(167, 23);
+            this.button6.Size = new System.Drawing.Size(125, 19);
             this.button6.TabIndex = 10;
             this.button6.Text = "GET";
             this.button6.UseVisualStyleBackColor = true;
@@ -354,11 +360,11 @@ namespace Tester01
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.DataPost);
-            this.tabControl1.Location = new System.Drawing.Point(13, 2);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabControl1.Location = new System.Drawing.Point(10, 2);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(724, 647);
+            this.tabControl1.Size = new System.Drawing.Size(543, 526);
             this.tabControl1.TabIndex = 11;
             // 
             // tabPage1
@@ -397,11 +403,11 @@ namespace Tester01
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.textBox4);
             this.tabPage1.Controls.Add(this.textBox3);
-            this.tabPage1.Location = new System.Drawing.Point(4, 25);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage1.Size = new System.Drawing.Size(716, 618);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(2);
+            this.tabPage1.Size = new System.Drawing.Size(535, 500);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "config";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -412,10 +418,9 @@ namespace Tester01
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(977, 127);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Location = new System.Drawing.Point(733, 103);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(104, 18);
+            this.label6.Size = new System.Drawing.Size(85, 15);
             this.label6.TabIndex = 205;
             this.label6.Text = "Ext Temp1 (C)";
             // 
@@ -424,10 +429,9 @@ namespace Tester01
             this.lblExTemp.AutoSize = true;
             this.lblExTemp.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lblExTemp.ForeColor = System.Drawing.Color.DarkSlateBlue;
-            this.lblExTemp.Location = new System.Drawing.Point(1113, 127);
-            this.lblExTemp.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblExTemp.Location = new System.Drawing.Point(835, 103);
             this.lblExTemp.Name = "lblExTemp";
-            this.lblExTemp.Size = new System.Drawing.Size(52, 24);
+            this.lblExTemp.Size = new System.Drawing.Size(44, 18);
             this.lblExTemp.TabIndex = 204;
             this.lblExTemp.Text = "------";
             // 
@@ -435,10 +439,9 @@ namespace Tester01
             // 
             this.btnStartDataSend.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnStartDataSend.ForeColor = System.Drawing.Color.White;
-            this.btnStartDataSend.Location = new System.Drawing.Point(519, 87);
-            this.btnStartDataSend.Margin = new System.Windows.Forms.Padding(4);
+            this.btnStartDataSend.Location = new System.Drawing.Point(389, 71);
             this.btnStartDataSend.Name = "btnStartDataSend";
-            this.btnStartDataSend.Size = new System.Drawing.Size(192, 26);
+            this.btnStartDataSend.Size = new System.Drawing.Size(144, 21);
             this.btnStartDataSend.TabIndex = 203;
             this.btnStartDataSend.Text = "GET DATA LOGS";
             this.btnStartDataSend.UseVisualStyleBackColor = false;
@@ -446,10 +449,9 @@ namespace Tester01
             // 
             // btnClearChart2
             // 
-            this.btnClearChart2.Location = new System.Drawing.Point(1166, 446);
-            this.btnClearChart2.Margin = new System.Windows.Forms.Padding(4);
+            this.btnClearChart2.Location = new System.Drawing.Point(874, 362);
             this.btnClearChart2.Name = "btnClearChart2";
-            this.btnClearChart2.Size = new System.Drawing.Size(39, 27);
+            this.btnClearChart2.Size = new System.Drawing.Size(29, 22);
             this.btnClearChart2.TabIndex = 202;
             this.btnClearChart2.Text = "C";
             this.btnClearChart2.UseVisualStyleBackColor = true;
@@ -459,10 +461,9 @@ namespace Tester01
             this.lblLinePow.AutoSize = true;
             this.lblLinePow.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lblLinePow.ForeColor = System.Drawing.Color.DarkSlateBlue;
-            this.lblLinePow.Location = new System.Drawing.Point(870, 149);
-            this.lblLinePow.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblLinePow.Location = new System.Drawing.Point(652, 121);
             this.lblLinePow.Name = "lblLinePow";
-            this.lblLinePow.Size = new System.Drawing.Size(52, 24);
+            this.lblLinePow.Size = new System.Drawing.Size(44, 18);
             this.lblLinePow.TabIndex = 201;
             this.lblLinePow.Text = "------";
             // 
@@ -471,10 +472,9 @@ namespace Tester01
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(744, 152);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Location = new System.Drawing.Point(558, 124);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(69, 18);
+            this.label7.Size = new System.Drawing.Size(58, 15);
             this.label7.TabIndex = 200;
             this.label7.Text = "Line Pow";
             // 
@@ -483,10 +483,9 @@ namespace Tester01
             this.lblDoorStat.AutoSize = true;
             this.lblDoorStat.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lblDoorStat.ForeColor = System.Drawing.Color.DarkSlateBlue;
-            this.lblDoorStat.Location = new System.Drawing.Point(638, 155);
-            this.lblDoorStat.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblDoorStat.Location = new System.Drawing.Point(478, 126);
             this.lblDoorStat.Name = "lblDoorStat";
-            this.lblDoorStat.Size = new System.Drawing.Size(52, 24);
+            this.lblDoorStat.Size = new System.Drawing.Size(44, 18);
             this.lblDoorStat.TabIndex = 199;
             this.lblDoorStat.Text = "------";
             // 
@@ -495,10 +494,9 @@ namespace Tester01
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label8.ForeColor = System.Drawing.Color.Black;
-            this.label8.Location = new System.Drawing.Point(516, 155);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Location = new System.Drawing.Point(387, 126);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(72, 18);
+            this.label8.Size = new System.Drawing.Size(58, 15);
             this.label8.TabIndex = 198;
             this.label8.Text = "Door Stat";
             // 
@@ -507,10 +505,9 @@ namespace Tester01
             this.lblRefTemp.AutoSize = true;
             this.lblRefTemp.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lblRefTemp.ForeColor = System.Drawing.Color.DarkSlateBlue;
-            this.lblRefTemp.Location = new System.Drawing.Point(638, 127);
-            this.lblRefTemp.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblRefTemp.Location = new System.Drawing.Point(478, 103);
             this.lblRefTemp.Name = "lblRefTemp";
-            this.lblRefTemp.Size = new System.Drawing.Size(52, 24);
+            this.lblRefTemp.Size = new System.Drawing.Size(44, 18);
             this.lblRefTemp.TabIndex = 197;
             this.lblRefTemp.Text = "------";
             // 
@@ -519,10 +516,9 @@ namespace Tester01
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label9.ForeColor = System.Drawing.Color.Black;
-            this.label9.Location = new System.Drawing.Point(516, 127);
-            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label9.Location = new System.Drawing.Point(387, 103);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(98, 18);
+            this.label9.Size = new System.Drawing.Size(80, 15);
             this.label9.TabIndex = 196;
             this.label9.Text = "Ref Temp (C)";
             // 
@@ -531,10 +527,9 @@ namespace Tester01
             this.lblInt.AutoSize = true;
             this.lblInt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lblInt.ForeColor = System.Drawing.Color.Black;
-            this.lblInt.Location = new System.Drawing.Point(744, 124);
-            this.lblInt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblInt.Location = new System.Drawing.Point(558, 101);
             this.lblInt.Name = "lblInt";
-            this.lblInt.Size = new System.Drawing.Size(94, 18);
+            this.lblInt.Size = new System.Drawing.Size(78, 15);
             this.lblInt.TabIndex = 195;
             this.lblInt.Text = "In Temp1 (C)";
             // 
@@ -543,10 +538,9 @@ namespace Tester01
             this.lblInTemp.AutoSize = true;
             this.lblInTemp.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lblInTemp.ForeColor = System.Drawing.Color.DarkSlateBlue;
-            this.lblInTemp.Location = new System.Drawing.Point(870, 124);
-            this.lblInTemp.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblInTemp.Location = new System.Drawing.Point(652, 101);
             this.lblInTemp.Name = "lblInTemp";
-            this.lblInTemp.Size = new System.Drawing.Size(52, 24);
+            this.lblInTemp.Size = new System.Drawing.Size(44, 18);
             this.lblInTemp.TabIndex = 194;
             this.lblInTemp.Text = "------";
             // 
@@ -555,23 +549,25 @@ namespace Tester01
             this.tabPage2.Controls.Add(this.JsonDataPost);
             this.tabPage2.Controls.Add(this.btnEpochSync);
             this.tabPage2.Controls.Add(this.JsonPost);
+            this.tabPage2.Controls.Add(this.LogTextBox);
             this.tabPage2.Controls.Add(this.btnGetDataLogs);
             this.tabPage2.Controls.Add(this.getpostjsonnetwork);
             this.tabPage2.Controls.Add(this.button8);
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage2.Size = new System.Drawing.Size(716, 618);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(2);
+            this.tabPage2.Size = new System.Drawing.Size(535, 500);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "log";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // JsonDataPost
             // 
-            this.JsonDataPost.Location = new System.Drawing.Point(6, 136);
+            this.JsonDataPost.Location = new System.Drawing.Point(4, 110);
+            this.JsonDataPost.Margin = new System.Windows.Forms.Padding(2);
             this.JsonDataPost.Name = "JsonDataPost";
-            this.JsonDataPost.Size = new System.Drawing.Size(228, 39);
+            this.JsonDataPost.Size = new System.Drawing.Size(171, 32);
             this.JsonDataPost.TabIndex = 231;
             this.JsonDataPost.Text = "DataLogPost";
             this.JsonDataPost.UseVisualStyleBackColor = true;
@@ -582,10 +578,9 @@ namespace Tester01
             this.btnEpochSync.BackColor = System.Drawing.Color.MintCream;
             this.btnEpochSync.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btnEpochSync.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnEpochSync.Location = new System.Drawing.Point(263, 50);
-            this.btnEpochSync.Margin = new System.Windows.Forms.Padding(4);
+            this.btnEpochSync.Location = new System.Drawing.Point(197, 41);
             this.btnEpochSync.Name = "btnEpochSync";
-            this.btnEpochSync.Size = new System.Drawing.Size(229, 31);
+            this.btnEpochSync.Size = new System.Drawing.Size(172, 25);
             this.btnEpochSync.TabIndex = 115;
             this.btnEpochSync.Text = "EPOCH SYNC";
             this.btnEpochSync.UseVisualStyleBackColor = false;
@@ -593,19 +588,30 @@ namespace Tester01
             // 
             // JsonPost
             // 
-            this.JsonPost.Location = new System.Drawing.Point(6, 95);
+            this.JsonPost.Location = new System.Drawing.Point(4, 77);
+            this.JsonPost.Margin = new System.Windows.Forms.Padding(2);
             this.JsonPost.Name = "JsonPost";
-            this.JsonPost.Size = new System.Drawing.Size(228, 35);
+            this.JsonPost.Size = new System.Drawing.Size(171, 28);
             this.JsonPost.TabIndex = 230;
             this.JsonPost.Text = "LogPost";
             this.JsonPost.UseVisualStyleBackColor = true;
             this.JsonPost.Click += new System.EventHandler(this.JsonPost_Click);
             // 
+            // LogTextBox
+            // 
+            this.LogTextBox.Location = new System.Drawing.Point(179, 77);
+            this.LogTextBox.Margin = new System.Windows.Forms.Padding(2);
+            this.LogTextBox.Name = "LogTextBox";
+            this.LogTextBox.Size = new System.Drawing.Size(339, 345);
+            this.LogTextBox.TabIndex = 194;
+            this.LogTextBox.Text = "";
+            // 
             // btnGetDataLogs
             // 
-            this.btnGetDataLogs.Location = new System.Drawing.Point(6, 50);
+            this.btnGetDataLogs.Location = new System.Drawing.Point(4, 41);
+            this.btnGetDataLogs.Margin = new System.Windows.Forms.Padding(2);
             this.btnGetDataLogs.Name = "btnGetDataLogs";
-            this.btnGetDataLogs.Size = new System.Drawing.Size(228, 39);
+            this.btnGetDataLogs.Size = new System.Drawing.Size(171, 32);
             this.btnGetDataLogs.TabIndex = 1;
             this.btnGetDataLogs.Text = "Get Data Logs";
             this.btnGetDataLogs.UseVisualStyleBackColor = true;
@@ -616,10 +622,9 @@ namespace Tester01
             this.getpostjsonnetwork.BackColor = System.Drawing.Color.LightCyan;
             this.getpostjsonnetwork.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.getpostjsonnetwork.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.getpostjsonnetwork.Location = new System.Drawing.Point(263, 15);
-            this.getpostjsonnetwork.Margin = new System.Windows.Forms.Padding(4);
+            this.getpostjsonnetwork.Location = new System.Drawing.Point(197, 12);
             this.getpostjsonnetwork.Name = "getpostjsonnetwork";
-            this.getpostjsonnetwork.Size = new System.Drawing.Size(229, 27);
+            this.getpostjsonnetwork.Size = new System.Drawing.Size(172, 22);
             this.getpostjsonnetwork.TabIndex = 227;
             this.getpostjsonnetwork.Text = "getpostjsonnetwork";
             this.getpostjsonnetwork.UseVisualStyleBackColor = false;
@@ -630,10 +635,9 @@ namespace Tester01
             this.button8.BackColor = System.Drawing.Color.MintCream;
             this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.button8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.button8.Location = new System.Drawing.Point(5, 14);
-            this.button8.Margin = new System.Windows.Forms.Padding(4);
+            this.button8.Location = new System.Drawing.Point(4, 11);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(229, 31);
+            this.button8.Size = new System.Drawing.Size(172, 25);
             this.button8.TabIndex = 196;
             this.button8.Text = "GET LOGS";
             this.button8.UseVisualStyleBackColor = false;
@@ -642,11 +646,11 @@ namespace Tester01
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.richTextBox2);
-            this.tabPage3.Location = new System.Drawing.Point(4, 25);
-            this.tabPage3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage3.Size = new System.Drawing.Size(716, 618);
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(2);
+            this.tabPage3.Size = new System.Drawing.Size(535, 500);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -654,51 +658,39 @@ namespace Tester01
             // richTextBox2
             // 
             this.richTextBox2.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox2.Location = new System.Drawing.Point(25, 6);
-            this.richTextBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.richTextBox2.Location = new System.Drawing.Point(19, 5);
             this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(551, 536);
+            this.richTextBox2.Size = new System.Drawing.Size(414, 436);
             this.richTextBox2.TabIndex = 102;
             this.richTextBox2.Text = "";
             // 
             // DataPost
             // 
-            this.DataPost.Location = new System.Drawing.Point(4, 25);
-            this.DataPost.Margin = new System.Windows.Forms.Padding(4);
+            this.DataPost.Location = new System.Drawing.Point(4, 22);
             this.DataPost.Name = "DataPost";
-            this.DataPost.Size = new System.Drawing.Size(716, 618);
+            this.DataPost.Size = new System.Drawing.Size(535, 500);
             this.DataPost.TabIndex = 3;
             this.DataPost.Text = "DataPost";
             this.DataPost.UseVisualStyleBackColor = true;
             // 
-            // LogTextBox
-            // 
-            this.LogTextBox.Location = new System.Drawing.Point(1032, 27);
-            this.LogTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.LogTextBox.Name = "LogTextBox";
-            this.LogTextBox.Size = new System.Drawing.Size(298, 322);
-            this.LogTextBox.TabIndex = 194;
-            this.LogTextBox.Text = "";
-            // 
             // dataLogTxtBox
             // 
-            this.dataLogTxtBox.Location = new System.Drawing.Point(739, 27);
-            this.dataLogTxtBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dataLogTxtBox.Location = new System.Drawing.Point(553, 11);
+            this.dataLogTxtBox.Margin = new System.Windows.Forms.Padding(2);
             this.dataLogTxtBox.Name = "dataLogTxtBox";
-            this.dataLogTxtBox.Size = new System.Drawing.Size(287, 322);
+            this.dataLogTxtBox.Size = new System.Drawing.Size(633, 436);
             this.dataLogTxtBox.TabIndex = 195;
             this.dataLogTxtBox.Text = "";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1597, 562);
+            this.ClientSize = new System.Drawing.Size(1198, 681);
             this.Controls.Add(this.dataLogTxtBox);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.LogTextBox);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);

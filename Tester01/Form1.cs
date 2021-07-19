@@ -48,9 +48,10 @@ namespace Tester01
 		int statusDebugIndex = 0;
 		bool ConnectBlink;
 		bool BlePeripheralConnected = false;
-		#endregion
-
-		public Form1()
+        #endregion
+        #region
+        #endregion
+        public Form1()
 		{
 			InitializeComponent();
 		}
@@ -1536,7 +1537,7 @@ namespace Tester01
 			try
 			{
 				string access_token = getToken();
-				Int32 epoch = getEpoch(access_token) + 3 * 60 * 60;
+				Int32 epoch = getEpoch(access_token);
 
 				int index = 0;
 				epoch_data[index++] = (byte)((epoch >> 0) & 0x000000FF);
@@ -1911,20 +1912,19 @@ namespace Tester01
 			try
 			{
 				string access_token = getToken();
-				int balance = jsonDatas.Length % 50;
-				int j = ((jsonDatas.Length / 16) + (balance > 0 ? 1 : 0));
+				int balance = jsonDatas.Length % 8;
+				int j = ((jsonDatas.Length / 8) + (balance > 0 ? 1 : 0));
 				
 				for (int i = 0; i < j; i++)
 				{
 					
-					JsonEventLog[] logs = new JsonEventLog[i == j - 1 ? balance : 16];
-					Array.Copy(jsonDatas, i * 16, logs, 0, i == j - 1 ? balance : 16);
-					for (int n = 0; n < logs.Length; n++)
-					{
+					JsonEventLog[] logs = new JsonEventLog[i == j - 1 ? balance : 8];
+					Array.Copy(jsonDatas, i * 8, logs, 0, i == j - 1 ? balance : 8);
+					
 
 
-						string strData = JsonConvert.SerializeObject(logs[n]);
-
+						string strData = JsonConvert.SerializeObject(logs);
+						dataLogTxtBox.AppendText(strData);
 						byte[] datas = Encoding.ASCII.GetBytes(strData);
 
 						if (strData.Length != 0)
@@ -1945,7 +1945,7 @@ namespace Tester01
 							var response = (HttpWebResponse)request.GetResponse();
 
 							var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
-						}
+						
                     }
                 }
 			}
