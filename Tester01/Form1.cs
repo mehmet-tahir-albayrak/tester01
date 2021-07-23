@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
+
 namespace Tester01
 {
 	public partial class Form1 : Form
@@ -48,12 +49,13 @@ namespace Tester01
 		int statusDebugIndex = 0;
 		bool ConnectBlink;
 		bool BlePeripheralConnected = false;
-        #endregion
-        #region
-        #endregion
-        public Form1()
+		#endregion
+		#region
+		#endregion
+		public Form1()
 		{
 			InitializeComponent();
+			Control.CheckForIllegalCrossThreadCalls = false;
 		}
 
 		private void Form1_Load(object sender, EventArgs e)
@@ -91,7 +93,7 @@ namespace Tester01
 			USB_GET_DATA_LOG_TABLE_LEN = 0x24,
 			USB_GET_LOG_TABLE_LEN = 0x23,
 			USB_GET_DATA_TABLE_LEN = 0x24
-	}
+		}
 
 		UInt32 Crc32(UInt32 Crc, UInt32 Data)
 		{
@@ -124,7 +126,7 @@ namespace Tester01
 
 		bool GetResponse(SerialPort sp, Commands cmd, Commands subCmd, out int length, out byte[] data)
 		{
-			data = new byte[1]; length = 0; 
+			data = new byte[1]; length = 0;
 			try
 			{
 				data = new byte[1];
@@ -313,7 +315,7 @@ namespace Tester01
 		string vaccinerefport = "";
 		private void SearchVaccineRef(object sender, EventArgs e)
 		{
-			
+
 			string[] ports = SerialPort.GetPortNames();
 			if (ports.Length > 0)
 			{
@@ -1358,11 +1360,9 @@ namespace Tester01
 							clr = Color.Black;
 							break;
 					}
-					LogDebugMessage("[" + (i / 6).ToString() + "]  " 
-										+ new DateTime(1970, 1, 1).AddSeconds((double)epoch).ToString() 
+					LogDebugMessage("[" + (i / 6).ToString() + "]  "
+										+ new DateTime(1970, 1, 1).AddSeconds((double)epoch).ToString()
 										+ "  " + command + parameter, clr);
-
-
 
 
 
@@ -1386,7 +1386,10 @@ namespace Tester01
 				LogTextBox.AppendText(Environment.NewLine);
 				LogTextBox.ScrollToCaret();
 			}));
+
+
 		}
+
 
 		private void DataLogDebugMessage(string msg, Color clr) /// datalogtextbox
 		{
@@ -1429,7 +1432,7 @@ namespace Tester01
 		}
 		private void LogTableComingData()
 
-			{
+		{
 			ClearLogMessage();
 
 			VaccPort.Open();
@@ -1448,11 +1451,14 @@ namespace Tester01
 						if (GetResponse(VaccPort, Commands.UsbCmd, Commands.USB_GET_LOG_TABLE, out rsp, out length))
 						{
 							USB_Handle(rsp, length); //veriler burda
+							
+							
 							timeout = 0;
 						}
 					}
 					if (timeout++ > 10)
 						break;
+					VaccPort.Close();
 				}
 			}
 			catch (Exception ex)
@@ -1465,7 +1471,11 @@ namespace Tester01
 
 		private void button8_Click(object sender, EventArgs e)
 		{
-				LogTableComingData();
+			Thread th1 = new Thread(LogTableComingData);
+			th1.Start();
+			VaccPort.Close();
+
+			//LogTableComingData();
 		}
 
 		private void btnGSMSend4_Click(object sender, EventArgs e)
@@ -1589,7 +1599,7 @@ namespace Tester01
 
 		private void button10_Click(object sender, EventArgs e)
 		{
-			
+
 		}
 
 
@@ -1597,10 +1607,11 @@ namespace Tester01
 		{
 			ClearLogMessage();
 
-			VaccPort.Open();
+
 
 			try
 			{
+				VaccPort.Open();
 				int timeout = 0; int length = 0; byte[] rsp;
 				SendCommand(VaccPort, Commands.UsbCmd, Commands.USB_GET_DATA_LOG_TABLE_LEN, 0, null);
 				System.Threading.Thread.Sleep(500);
@@ -1621,7 +1632,7 @@ namespace Tester01
 					if (VaccPort.BytesToRead > 0)
 					{
 						if (GetDataLog(VaccPort, Commands.UsbCmd, Commands.USB_GET_DATA_LOG, out rsp, out length))
-						{	
+						{
 							USB_Handle2(rsp);
 							timeout = 0;
 						}
@@ -1659,8 +1670,8 @@ namespace Tester01
 						VaccPort.Close(); return 0;
 					}
 				}
-                else
-                {
+				else
+				{
 					VaccPort.Close(); return 0;
 				}
 				SendCommand(VaccPort, Commands.UsbCmd, Commands.USB_GET_DATA_LOG, 0, null);
@@ -1687,7 +1698,7 @@ namespace Tester01
 				datas = null;
 				return 0;
 			}
-		
+
 		}
 
 
@@ -1695,8 +1706,16 @@ namespace Tester01
 		UInt32 intDataLogLength = 0;
 		private void btnGetDataLogs_Click(object sender, EventArgs e)
 		{
-				DataLogTableComingData();
-			
+			Thread th2 = new Thread(DataLogTableComingData);
+			th2.Start();
+			VaccPort.Close();
+			//if (th2.IsAlive)
+			//{
+			//	btnGetDataLogs.Enabled = false;
+			//}
+			//else
+			//	btnGetDataLogs.Enabled = true;
+
 		}
 
 
@@ -1831,14 +1850,16 @@ namespace Tester01
 				{
 					SendCommand(VaccPort, Commands.UsbCmd, Commands.USB_GET_LOG_TABLE_LEN, 0, null);
 					System.Threading.Thread.Sleep(500);
-					if (GetResponse(VaccPort,Commands.UsbCmd,Commands.USB_GET_LOG_TABLE_LEN, out logIndex, out rsp))
+					ControlRichTextbox.Text = (Commands.USB_GET_DATA_LOG_TABLE_LEN.ToString());
+
+					if (GetResponse(VaccPort, Commands.UsbCmd, Commands.USB_GET_LOG_TABLE_LEN, out logIndex, out rsp))
 					{
 						logIndex = BitConverter.ToInt32(rsp, 0);
 						logs = new JsonEventLog[logIndex];
 						logIndex = 0;
 					}
 					SendCommand(VaccPort, Commands.UsbCmd, Commands.USB_GET_LOG_TABLE, 0, null);
-					
+
 					while (true)
 					{
 						System.Threading.Thread.Sleep(500);
@@ -1873,7 +1894,7 @@ namespace Tester01
 										VaccPort.Close();
 										return logIndex;
 									}
-									logs[logIndex++] = new JsonEventLog() { uid=UID, dateEpoch = epoch, logId = logID, logParam = logParam, logValue = logValue };
+									logs[logIndex++] = new JsonEventLog() { uid = UID, dateEpoch = epoch, logId = logID, logParam = logParam, logValue = logValue };
 								}
 								timeout = 0;
 							}
@@ -1896,14 +1917,17 @@ namespace Tester01
 		}
 		/* log post*/
 		public string UID = "D00130222113";
+
 		
+
+
 		private void JsonPost_Click(object sender, EventArgs e)
 		{
-
+			
 			JsonEventLog[] jsonDatas;
 
 			int iLogLength = GetEventsLogs(out jsonDatas);
-
+			
 			//for (int i = 0; i < jsonDatas.Length; i++)
 			//{
 			//    jsonDatas[i] = new JsonEventLog() { dateEpoch = (1625569609 + i*60), logId = 1, logParam = 0, logValue = "3", uid = "E00630222113" };
@@ -1911,43 +1935,45 @@ namespace Tester01
 
 			try
 			{
+				ControlRichTextbox.Text = ("GÖNDERİLEN LOG SAYISI :  " + (iLogLength).ToString());
+				ControlRichTextbox.AppendText(Text);
 				string access_token = getToken();
 				int balance = jsonDatas.Length % 8;
 				int j = ((jsonDatas.Length / 8) + (balance > 0 ? 1 : 0));
-				
+
 				for (int i = 0; i < j; i++)
 				{
-					
+
 					JsonEventLog[] logs = new JsonEventLog[i == j - 1 ? balance : 8];
 					Array.Copy(jsonDatas, i * 8, logs, 0, i == j - 1 ? balance : 8);
-					
 
 
-						string strData = JsonConvert.SerializeObject(logs);
-						dataLogTxtBox.AppendText(strData);
-						byte[] datas = Encoding.ASCII.GetBytes(strData);
 
-						if (strData.Length != 0)
+					string strData = JsonConvert.SerializeObject(logs);
+					dataLogTxtBox.AppendText(strData);
+					byte[] datas = Encoding.ASCII.GetBytes(strData);
+
+					if (strData.Length != 0)
+					{
+
+
+						HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://ats.isina.com.tr/rs/rest/events/");
+						request.ContentType = "application/json";
+						request.Headers.Add("Authorization", "Bearer " + access_token);
+						request.Method = "POST";
+
+						request.ContentLength = datas.Length;
+						using (var stream = request.GetRequestStream())
 						{
+							stream.Write(datas, 0, datas.Length);
+						}
 
+						var response = (HttpWebResponse)request.GetResponse();
 
-							HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://ats.isina.com.tr/rs/rest/events/");
-							request.ContentType = "application/json";
-							request.Headers.Add("Authorization", "Bearer " + access_token);
-							request.Method = "POST";
+						var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
 
-							request.ContentLength = datas.Length;
-							using (var stream = request.GetRequestStream())
-							{
-								stream.Write(datas, 0, datas.Length);
-							}
-
-							var response = (HttpWebResponse)request.GetResponse();
-
-							var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
-						
-                    }
-                }
+					}
+				}
 			}
 			catch (Exception ex)
 			{
@@ -1962,90 +1988,91 @@ namespace Tester01
 			const int DATA_LOG_ENTRY_LEN = 8;
 			byte[] raw_data_log = new byte[DATA_LOG_ENTRY_LEN];
 			logs = new JsonDataLog[1];
-					try
-					{
-						VaccPort.Open();
-						int timeout = 0; int length = 0; byte[] rsp; int DatalogIndex = 0;
-						SendCommand(VaccPort, Commands.UsbCmd, Commands.USB_GET_DATA_LOG_TABLE_LEN, 0, null);
-						System.Threading.Thread.Sleep(500);
-						if (GetResponse(VaccPort, Commands.UsbCmd, Commands.USB_GET_DATA_LOG_TABLE_LEN, out length, out rsp))
-						{
-							DatalogIndex = BitConverter.ToInt32(rsp, 0);
-							logs = new JsonDataLog[DatalogIndex];
-							DatalogIndex = 0;
-						}
-					else
-					{
-						return 0;
-					}
-						SendCommand(VaccPort, Commands.UsbCmd, Commands.USB_GET_DATA_LOG, 0, null);
-
-						while (true)
-						{
-							System.Threading.Thread.Sleep(500);
-							if (VaccPort.BytesToRead > 0)
-							{
-								if (GetResponse(VaccPort, Commands.UsbCmd, Commands.USB_GET_DATA_LOG, out rsp, out length))
-								{
-									{
-										for (int i = 0; i < length; i += DATA_LOG_ENTRY_LEN)
-										{
-											Array.Copy(rsp, 8 * i, raw_data_log, 0, DATA_LOG_ENTRY_LEN);
-											Data_Log_parser(raw_data_log, out uint epoch, out int door_open, out int on_power, out double ref_temp, out double in_temp, out double ex_temp );
-
-											logs[DatalogIndex++] = new JsonDataLog()
-											{
-												deviceUid = UID,
-												reportDateEpoch = epoch.ToString(), 
-												externalModuleTemprature=ex_temp, 
-												internalModuleTemprature=in_temp,
-												fridgeTemprature=ref_temp,
-												onPower= Convert.ToBoolean(on_power),
-												alarmDescription = "X Alarm",
-												gsmNetwork = "",
-												gsmNetworkQuality = 0.0,
-												wifiSignalQuality = 0.0,
-												ethernetState = false,
-												batteryVoltage = 220.0,
-												batteryPercent = 0,
-												batteryLife=0 ,
-												lightLevel=100.0 , 
-												alarmCode="A123"  , 
-												faultCode = "F123" ,
-												faultDescription="X FAULT",
-												workingCounter=0 ,
-												restartCounter=0 
-											};
-
-											if (DatalogIndex > logs.Length + 1)
-											{
-												VaccPort.Close();
-											
-											}
-									   
-										}
-										timeout = 0;
-									}
-							
-								}
-						
-								if (timeout++ > 10)
-								{
-									break;
-								}
-							}
-						}
-					}
-
-				catch (Exception ex)
+			try
+			{
+				VaccPort.Open();
+				int timeout = 0; int length = 0; byte[] rsp; int DatalogIndex = 0;
+				SendCommand(VaccPort, Commands.UsbCmd, Commands.USB_GET_DATA_LOG_TABLE_LEN, 0, null);
+				System.Threading.Thread.Sleep(500);
+				if (GetResponse(VaccPort, Commands.UsbCmd, Commands.USB_GET_DATA_LOG_TABLE_LEN, out length, out rsp))
 				{
-					
+					DatalogIndex = BitConverter.ToInt32(rsp, 0);
+					logs = new JsonDataLog[DatalogIndex];
+					DatalogIndex = 0;
 				}
+				else
+				{
+					return 0;
+				}
+				SendCommand(VaccPort, Commands.UsbCmd, Commands.USB_GET_DATA_LOG, 0, null);
+
+				while (true)
+				{
+					System.Threading.Thread.Sleep(500);
+					if (VaccPort.BytesToRead > 0)
+					{
+						if (GetResponse(VaccPort, Commands.UsbCmd, Commands.USB_GET_DATA_LOG, out rsp, out length))
+						{
+							{
+								for (int i = 0; i < length; i += DATA_LOG_ENTRY_LEN)
+								{
+									Array.Copy(rsp, 8 * i, raw_data_log, 0, DATA_LOG_ENTRY_LEN);
+									Data_Log_parser(raw_data_log, out uint epoch, out int door_open, out int on_power, out double ref_temp, out double in_temp, out double ex_temp);
+									
+									ControlRichTextbox2.Text = (" GÖNDERİLEN DATA LOG SAYISI :  " + (logs.Length).ToString());
+									logs[DatalogIndex++] = new JsonDataLog()
+									{
+										deviceUid = UID,
+										reportDateEpoch = epoch.ToString(),
+										externalModuleTemprature = ex_temp,
+										internalModuleTemprature = in_temp,
+										fridgeTemprature = ref_temp,
+										onPower = Convert.ToBoolean(on_power),
+										alarmDescription = "X Alarm",
+										gsmNetwork = "",
+										gsmNetworkQuality = 0.0,
+										wifiSignalQuality = 0.0,
+										ethernetState = false,
+										batteryVoltage = 220.0,
+										batteryPercent = 0,
+										batteryLife = 0,
+										lightLevel = 100.0,
+										alarmCode = "A123",
+										faultCode = "F123",
+										faultDescription = "X FAULT",
+										workingCounter = 0,
+										restartCounter = 0
+									};
+
+									if (DatalogIndex > logs.Length + 1)
+									{
+										VaccPort.Close();
+
+									}
+
+								}
+								timeout = 0;
+							}
+
+						}
+
+						if (timeout++ > 10)
+						{
+							break;
+						}
+					}
+				}
+			}
+
+			catch (Exception ex)
+			{
+
+			}
 			VaccPort.Close();
 			//logs = null;
 			return 0;
-		}           
-
+		}
+		
 
 		private void button10_Click_1(object sender, EventArgs e)
 		{
@@ -2064,39 +2091,39 @@ namespace Tester01
 				int balance = jsonDatas.Length % 16;
 				int j = ((jsonDatas.Length / 16) + (balance > 0 ? 1 : 0));
 				string access_token = getToken();
-				
+
 				for (int i = 0; i < j; i++)
 				{
-					JsonDataLog[] logs = new JsonDataLog[i == j -1 ? balance : 16];
-					Array.Copy(jsonDatas, i *  16, logs, 0, i == j -1 ? balance : 16);
-                    for (int n = 0; n < logs.Length; n++)
-                    {
+					JsonDataLog[] logs = new JsonDataLog[i == j - 1 ? balance : 16];
+					Array.Copy(jsonDatas, i * 16, logs, 0, i == j - 1 ? balance : 16);
+					for (int n = 0; n < logs.Length; n++)
+					{
 
-                        string strData = JsonConvert.SerializeObject(logs[n]);
-						dataLogTxtBox.AppendText(strData) ;
-                        byte[] datas = Encoding.ASCII.GetBytes(strData);
+						string strData = JsonConvert.SerializeObject(logs[n]);
+						dataLogTxtBox.AppendText(strData);
+						byte[] datas = Encoding.ASCII.GetBytes(strData);
 
-                        if (strData.Length != 0)
-                        {
+						if (strData.Length != 0)
+						{
 
 
-                            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://ats.isina.com.tr/rs/rest/device-data/");
-                            request.ContentType = "application/json";
-                            request.Headers.Add("Authorization", "Bearer " + access_token);
-                            request.Method = "POST";
+							HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://ats.isina.com.tr/rs/rest/device-data/");
+							request.ContentType = "application/json";
+							request.Headers.Add("Authorization", "Bearer " + access_token);
+							request.Method = "POST";
 
-                            request.ContentLength = datas.Length;
-                            using (var stream = request.GetRequestStream())
-                            {
-                                stream.Write(datas, 0, datas.Length);
-                            }
+							request.ContentLength = datas.Length;
+							using (var stream = request.GetRequestStream())
+							{
+								stream.Write(datas, 0, datas.Length);
+							}
 
-                            var response = (HttpWebResponse)request.GetResponse();
+							var response = (HttpWebResponse)request.GetResponse();
 
-                            var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+							var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
 
-                        } 
-                    }
+						}
+					}
 				}
 			}
 			catch (Exception ex)
@@ -2105,19 +2132,204 @@ namespace Tester01
 			}
 		}
 
-        private void statusStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
+		private void statusStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+		{
 
+		}
+
+		private void tsLblMain_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		/************************************************************************************************************************************************************************************************************************************************************************************/
+
+		public void uzunluk()
+        
+			{
+				
+
+				VaccPort.Open();
+
+				try
+				{
+					int timeout = 0;
+					SendCommand(VaccPort, Commands.UsbCmd, Commands.USB_GET_LOG_TABLE, 0, null);
+					System.Threading.Thread.Sleep(500);
+					while (true)
+					{
+						int length = 0; byte[] rsp;
+						System.Threading.Thread.Sleep(500);
+						if (VaccPort.BytesToRead > 0)
+						{
+							if (GetResponse(VaccPort, Commands.UsbCmd, Commands.USB_GET_LOG_TABLE, out rsp, out length))
+							{
+
+							ControlRichTextbox.Text = ( "GÖNDERİLEN LOG SAYISI :  " +(length / 6).ToString()  ) ;
+							timeout = 0;
+							}
+						}
+						if (timeout++ > 10)
+							break;
+						VaccPort.Close();
+					}
+				}
+				catch (Exception ex)
+				{
+
+				}
+				VaccPort.Close();
+			}
+
+			private void LOGUZUNLUGU_Click(object sender, EventArgs e)
+        {
+			ControlRichTextbox.Clear();
+			uzunluk();
+			
+			
+			
         }
 
-        private void tsLblMain_Click(object sender, EventArgs e)
+        private void Senkronizasyon_Click(object sender, EventArgs e)
         {
-
+			JsonPost2();
+			//ControlRichTextbox.Text = "EVENT LOGLAR ALINIYOR";
+			//progressBar1.Value = 10;
+			//ControlRichTextbox.Text = "EVETN LOGLAR GÖNDERİLDİ";
+			//progressBar1.Value = 50;
+			
+			//JsonDataPost2();
+			//progressBar1.Value = 70;
+			//ControlRichTextbox2.Text = "DATA LOGLAR ALINIYOR";
         }
+		private void JsonDataPost2()
+        {
+			JsonDataLog[] jsonDatas;
 
-        /******************************************************************************************************************************************//******************************************************************************************************************************************/
+			int iLogLength = GetDataLogs(out jsonDatas);
+			
 
-    }
+			//for (int i = 0; i < jsonDatas.Length; i++)
+			//{
+			//    jsonDatas[i] = new JsonEventLog() { dateEpoch = (1625569609 + i*60), logId = 1, logParam = 0, logValue = "3", uid = "E00630222113" };
+			//}
+
+			try
+			{
+				//ControlRichTextbox.AppendText(Text);
+				
+				//ControlRichTextbox.Text = (" DATA LOG SAYISI :  " + (jsonDatas).ToString());
+				
+				int balance = jsonDatas.Length % 16;
+				int j = ((jsonDatas.Length / 16) + (balance > 0 ? 1 : 0));
+				string access_token = getToken(); 
+
+				for (int i = 0; i < j; i++)
+				{
+					
+					JsonDataLog[] logs = new JsonDataLog[i == j - 1 ? balance : 16];
+					Array.Copy(jsonDatas, i * 16, logs, 0, i == j - 1 ? balance : 16);
+					for (int n = 0; n < logs.Length; n++)
+					{
+
+						string strData = JsonConvert.SerializeObject(logs[n]);
+						dataLogTxtBox.AppendText(strData);
+						byte[] datas = Encoding.ASCII.GetBytes(strData);
+
+						if (strData.Length != 0)
+						{
+
+
+							HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://ats.isina.com.tr/rs/rest/device-data/");
+							request.ContentType = "application/json";
+							request.Headers.Add("Authorization", "Bearer " + access_token);
+							request.Method = "POST";
+
+							request.ContentLength = datas.Length;
+							using (var stream = request.GetRequestStream())
+							{
+								stream.Write(datas, 0, datas.Length);
+							}
+
+							var response = (HttpWebResponse)request.GetResponse();
+
+							var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+
+						}
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+
+			}
+		}
+		private void JsonPost2()
+		{
+			JsonEventLog[] jsonDatas;
+
+			progressBar1.Value = 50;
+			int iLogLength2 = GetEventsLogs(out jsonDatas);
+
+			System.Threading.Thread.Sleep(1000);
+
+			//for (int i = 0; i < jsonDatas.Length; i++)
+			//{
+			//    jsonDatas[i] = new JsonEventLog() { dateEpoch = (1625569609 + i*60), logId = 1, logParam = 0, logValue = "3", uid = "E00630222113" };
+			//}
+
+			try
+			{
+				ControlRichTextbox.Text = ("GÖNDERİLEN LOG SAYISI :  " + (iLogLength2).ToString());
+				//ControlRichTextbox.AppendText(Text);
+
+				string access_token = getToken();
+				int balance = jsonDatas.Length % 8;
+				int j = ((jsonDatas.Length / 8) + (balance > 0 ? 1 : 0));
+
+				for (int i = 0; i < j; i++)
+				{
+
+					JsonEventLog[] logs = new JsonEventLog[i == j - 1 ? balance : 8];
+					Array.Copy(jsonDatas, i * 8, logs, 0, i == j - 1 ? balance : 8);
+
+
+
+					string strData = JsonConvert.SerializeObject(logs);
+					dataLogTxtBox.AppendText(strData);
+					byte[] datas = Encoding.ASCII.GetBytes(strData);
+
+					if (strData.Length != 0)
+					{
+
+
+						HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://ats.isina.com.tr/rs/rest/events/");
+						request.ContentType = "application/json";
+						request.Headers.Add("Authorization", "Bearer " + access_token);
+						request.Method = "POST";
+
+						request.ContentLength = datas.Length;
+						using (var stream = request.GetRequestStream())
+						{
+							stream.Write(datas, 0, datas.Length);
+						}
+
+						var response = (HttpWebResponse)request.GetResponse();
+
+						var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+
+					}
+				}
+				ControlRichTextbox2.Text = "DATA LOGLAR GÖNDERİLDİ";
+				progressBar1.Value = 100;
+			}
+			
+			catch (Exception ex)
+			{
+
+			}
+		}
+	}
 }
 
 	
