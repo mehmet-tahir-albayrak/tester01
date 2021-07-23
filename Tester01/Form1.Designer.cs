@@ -73,7 +73,7 @@ namespace Tester01
             this.lblInt = new System.Windows.Forms.Label();
             this.lblInTemp = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.Senkronizasyon = new System.Windows.Forms.Button();
+            this.EvenLogSenkronizasyon = new System.Windows.Forms.Button();
             this.LOGUZUNLUGU = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.ControlRichTextbox2 = new System.Windows.Forms.RichTextBox();
@@ -89,11 +89,15 @@ namespace Tester01
             this.DataPost = new System.Windows.Forms.TabPage();
             this.LogTextBox = new System.Windows.Forms.RichTextBox();
             this.dataLogTxtBox = new System.Windows.Forms.RichTextBox();
+            this.DataLogSenkronizasyon = new System.Windows.Forms.Button();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.progressBar2 = new System.Windows.Forms.ProgressBar();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // ScanofPorts
@@ -441,7 +445,7 @@ namespace Tester01
             this.btnStartDataSend.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnStartDataSend.ForeColor = System.Drawing.Color.White;
             this.btnStartDataSend.Location = new System.Drawing.Point(519, 87);
-            this.btnStartDataSend.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnStartDataSend.Margin = new System.Windows.Forms.Padding(4);
             this.btnStartDataSend.Name = "btnStartDataSend";
             this.btnStartDataSend.Size = new System.Drawing.Size(192, 26);
             this.btnStartDataSend.TabIndex = 203;
@@ -452,7 +456,7 @@ namespace Tester01
             // btnClearChart2
             // 
             this.btnClearChart2.Location = new System.Drawing.Point(1165, 446);
-            this.btnClearChart2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnClearChart2.Margin = new System.Windows.Forms.Padding(4);
             this.btnClearChart2.Name = "btnClearChart2";
             this.btnClearChart2.Size = new System.Drawing.Size(39, 27);
             this.btnClearChart2.TabIndex = 202;
@@ -557,7 +561,9 @@ namespace Tester01
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.Senkronizasyon);
+            this.tabPage2.Controls.Add(this.progressBar2);
+            this.tabPage2.Controls.Add(this.DataLogSenkronizasyon);
+            this.tabPage2.Controls.Add(this.EvenLogSenkronizasyon);
             this.tabPage2.Controls.Add(this.LOGUZUNLUGU);
             this.tabPage2.Controls.Add(this.progressBar1);
             this.tabPage2.Controls.Add(this.ControlRichTextbox2);
@@ -577,22 +583,22 @@ namespace Tester01
             this.tabPage2.Text = "log";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // Senkronizasyon
+            // EvenLogSenkronizasyon
             // 
-            this.Senkronizasyon.Location = new System.Drawing.Point(261, 140);
-            this.Senkronizasyon.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.Senkronizasyon.Name = "Senkronizasyon";
-            this.Senkronizasyon.Size = new System.Drawing.Size(229, 28);
-            this.Senkronizasyon.TabIndex = 235;
-            this.Senkronizasyon.Text = "Senkronizasyon";
-            this.Senkronizasyon.UseVisualStyleBackColor = true;
-            this.Senkronizasyon.Click += new System.EventHandler(this.Senkronizasyon_Click);
+            this.EvenLogSenkronizasyon.Location = new System.Drawing.Point(240, 140);
+            this.EvenLogSenkronizasyon.Margin = new System.Windows.Forms.Padding(4);
+            this.EvenLogSenkronizasyon.Name = "EvenLogSenkronizasyon";
+            this.EvenLogSenkronizasyon.Size = new System.Drawing.Size(237, 28);
+            this.EvenLogSenkronizasyon.TabIndex = 235;
+            this.EvenLogSenkronizasyon.Text = "Event Log Senkronizasyon";
+            this.EvenLogSenkronizasyon.UseVisualStyleBackColor = true;
+            this.EvenLogSenkronizasyon.Click += new System.EventHandler(this.Senkronizasyon_Click);
             // 
             // LOGUZUNLUGU
             // 
             this.LOGUZUNLUGU.AllowDrop = true;
             this.LOGUZUNLUGU.Location = new System.Drawing.Point(263, 95);
-            this.LOGUZUNLUGU.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.LOGUZUNLUGU.Margin = new System.Windows.Forms.Padding(4);
             this.LOGUZUNLUGU.Name = "LOGUZUNLUGU";
             this.LOGUZUNLUGU.Size = new System.Drawing.Size(229, 28);
             this.LOGUZUNLUGU.TabIndex = 234;
@@ -602,8 +608,9 @@ namespace Tester01
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(7, 587);
-            this.progressBar1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.progressBar1.Location = new System.Drawing.Point(4, 394);
+            this.progressBar1.Margin = new System.Windows.Forms.Padding(4);
+            this.progressBar1.Maximum = 50;
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(700, 28);
             this.progressBar1.Step = 8;
@@ -611,19 +618,19 @@ namespace Tester01
             // 
             // ControlRichTextbox2
             // 
-            this.ControlRichTextbox2.Location = new System.Drawing.Point(263, 181);
-            this.ControlRichTextbox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ControlRichTextbox2.Location = new System.Drawing.Point(4, 430);
+            this.ControlRichTextbox2.Margin = new System.Windows.Forms.Padding(4);
             this.ControlRichTextbox2.Name = "ControlRichTextbox2";
-            this.ControlRichTextbox2.Size = new System.Drawing.Size(227, 398);
+            this.ControlRichTextbox2.Size = new System.Drawing.Size(697, 285);
             this.ControlRichTextbox2.TabIndex = 232;
             this.ControlRichTextbox2.Text = "";
             // 
             // ControlRichTextbox
             // 
             this.ControlRichTextbox.Location = new System.Drawing.Point(7, 181);
-            this.ControlRichTextbox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ControlRichTextbox.Margin = new System.Windows.Forms.Padding(4);
             this.ControlRichTextbox.Name = "ControlRichTextbox";
-            this.ControlRichTextbox.Size = new System.Drawing.Size(227, 398);
+            this.ControlRichTextbox.Size = new System.Drawing.Size(697, 205);
             this.ControlRichTextbox.TabIndex = 232;
             this.ControlRichTextbox.Text = "";
             // 
@@ -644,7 +651,7 @@ namespace Tester01
             this.btnEpochSync.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btnEpochSync.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnEpochSync.Location = new System.Drawing.Point(263, 50);
-            this.btnEpochSync.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnEpochSync.Margin = new System.Windows.Forms.Padding(4);
             this.btnEpochSync.Name = "btnEpochSync";
             this.btnEpochSync.Size = new System.Drawing.Size(229, 31);
             this.btnEpochSync.TabIndex = 115;
@@ -680,7 +687,7 @@ namespace Tester01
             this.getpostjsonnetwork.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.getpostjsonnetwork.ForeColor = System.Drawing.SystemColors.Desktop;
             this.getpostjsonnetwork.Location = new System.Drawing.Point(263, 15);
-            this.getpostjsonnetwork.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.getpostjsonnetwork.Margin = new System.Windows.Forms.Padding(4);
             this.getpostjsonnetwork.Name = "getpostjsonnetwork";
             this.getpostjsonnetwork.Size = new System.Drawing.Size(229, 27);
             this.getpostjsonnetwork.TabIndex = 227;
@@ -694,7 +701,7 @@ namespace Tester01
             this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.button8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.button8.Location = new System.Drawing.Point(5, 14);
-            this.button8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button8.Margin = new System.Windows.Forms.Padding(4);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(229, 31);
             this.button8.TabIndex = 196;
@@ -718,7 +725,7 @@ namespace Tester01
             // 
             this.richTextBox2.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBox2.Location = new System.Drawing.Point(25, 6);
-            this.richTextBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.richTextBox2.Margin = new System.Windows.Forms.Padding(4);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.Size = new System.Drawing.Size(551, 536);
             this.richTextBox2.TabIndex = 102;
@@ -727,7 +734,7 @@ namespace Tester01
             // DataPost
             // 
             this.DataPost.Location = new System.Drawing.Point(4, 25);
-            this.DataPost.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DataPost.Margin = new System.Windows.Forms.Padding(4);
             this.DataPost.Name = "DataPost";
             this.DataPost.Size = new System.Drawing.Size(716, 781);
             this.DataPost.TabIndex = 3;
@@ -745,12 +752,34 @@ namespace Tester01
             // 
             // dataLogTxtBox
             // 
-            this.dataLogTxtBox.Location = new System.Drawing.Point(737, 14);
+            this.dataLogTxtBox.Location = new System.Drawing.Point(743, 14);
             this.dataLogTxtBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataLogTxtBox.Name = "dataLogTxtBox";
-            this.dataLogTxtBox.Size = new System.Drawing.Size(764, 630);
+            this.dataLogTxtBox.Size = new System.Drawing.Size(764, 767);
             this.dataLogTxtBox.TabIndex = 195;
             this.dataLogTxtBox.Text = "";
+            // 
+            // DataLogSenkronizasyon
+            // 
+            this.DataLogSenkronizasyon.Location = new System.Drawing.Point(484, 140);
+            this.DataLogSenkronizasyon.Name = "DataLogSenkronizasyon";
+            this.DataLogSenkronizasyon.Size = new System.Drawing.Size(217, 28);
+            this.DataLogSenkronizasyon.TabIndex = 236;
+            this.DataLogSenkronizasyon.Text = "Data Log Senkronizasyon";
+            this.DataLogSenkronizasyon.UseVisualStyleBackColor = true;
+            this.DataLogSenkronizasyon.Click += new System.EventHandler(this.DataLogSenkronizasyon_Click);
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // progressBar2
+            // 
+            this.progressBar2.Location = new System.Drawing.Point(4, 722);
+            this.progressBar2.Maximum = 50;
+            this.progressBar2.Name = "progressBar2";
+            this.progressBar2.Size = new System.Drawing.Size(700, 32);
+            this.progressBar2.TabIndex = 237;
             // 
             // Form1
             // 
@@ -772,6 +801,7 @@ namespace Tester01
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -835,8 +865,11 @@ namespace Tester01
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.RichTextBox ControlRichTextbox;
         private System.Windows.Forms.Button LOGUZUNLUGU;
-        private System.Windows.Forms.Button Senkronizasyon;
+        private System.Windows.Forms.Button EvenLogSenkronizasyon;
         private System.Windows.Forms.RichTextBox ControlRichTextbox2;
+        private System.Windows.Forms.Button DataLogSenkronizasyon;
+        private System.Windows.Forms.ProgressBar progressBar2;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }
 
