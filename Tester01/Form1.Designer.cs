@@ -116,7 +116,7 @@ namespace Tester01
             this.statusStrip1.Location = new System.Drawing.Point(12, 815);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 13, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(355, 26);
+            this.statusStrip1.Size = new System.Drawing.Size(305, 26);
             this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "statusStrip1";
             this.statusStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.statusStrip1_ItemClicked);
@@ -124,19 +124,19 @@ namespace Tester01
             // pbMain
             // 
             this.pbMain.Name = "pbMain";
-            this.pbMain.Size = new System.Drawing.Size(100, 18);
+            this.pbMain.Size = new System.Drawing.Size(100, 20);
             // 
             // tsLblMain
             // 
             this.tsLblMain.Name = "tsLblMain";
-            this.tsLblMain.Size = new System.Drawing.Size(86, 20);
+            this.tsLblMain.Size = new System.Drawing.Size(69, 21);
             this.tsLblMain.Text = "lMainStatus";
             this.tsLblMain.Click += new System.EventHandler(this.tsLblMain_Click);
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(151, 20);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 21);
             this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             // 
             // lblSSID
@@ -144,7 +144,7 @@ namespace Tester01
             this.lblSSID.AutoSize = true;
             this.lblSSID.Location = new System.Drawing.Point(19, 32);
             this.lblSSID.Name = "lblSSID";
-            this.lblSSID.Size = new System.Drawing.Size(39, 17);
+            this.lblSSID.Size = new System.Drawing.Size(39, 16);
             this.lblSSID.TabIndex = 1;
             this.lblSSID.Text = "SSID";
             // 
@@ -183,7 +183,7 @@ namespace Tester01
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(19, 146);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 17);
+            this.label1.Size = new System.Drawing.Size(35, 16);
             this.label1.TabIndex = 1;
             this.label1.Text = "PAS";
             // 
@@ -200,7 +200,7 @@ namespace Tester01
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(264, 38);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(31, 17);
+            this.label2.Size = new System.Drawing.Size(31, 16);
             this.label2.TabIndex = 1;
             this.label2.Text = "UID";
             // 
@@ -217,7 +217,7 @@ namespace Tester01
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(8, 256);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(21, 17);
+            this.label3.Size = new System.Drawing.Size(21, 16);
             this.label3.TabIndex = 1;
             this.label3.Text = "ID";
             // 
@@ -235,7 +235,7 @@ namespace Tester01
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(264, 146);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(36, 17);
+            this.label4.Size = new System.Drawing.Size(35, 16);
             this.label4.TabIndex = 1;
             this.label4.Text = "LDR";
             // 
@@ -261,7 +261,7 @@ namespace Tester01
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(8, 284);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(69, 17);
+            this.label5.Size = new System.Drawing.Size(68, 16);
             this.label5.TabIndex = 1;
             this.label5.Text = "VERSİON";
             // 
@@ -420,7 +420,7 @@ namespace Tester01
             this.label6.Location = new System.Drawing.Point(977, 127);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(104, 18);
+            this.label6.Size = new System.Drawing.Size(85, 15);
             this.label6.TabIndex = 205;
             this.label6.Text = "Ext Temp1 (C)";
             // 
@@ -432,7 +432,7 @@ namespace Tester01
             this.lblExTemp.Location = new System.Drawing.Point(1113, 127);
             this.lblExTemp.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblExTemp.Name = "lblExTemp";
-            this.lblExTemp.Size = new System.Drawing.Size(52, 24);
+            this.lblExTemp.Size = new System.Drawing.Size(44, 18);
             this.lblExTemp.TabIndex = 204;
             this.lblExTemp.Text = "------";
             // 
@@ -467,7 +467,7 @@ namespace Tester01
             this.lblLinePow.Location = new System.Drawing.Point(869, 149);
             this.lblLinePow.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLinePow.Name = "lblLinePow";
-            this.lblLinePow.Size = new System.Drawing.Size(52, 24);
+            this.lblLinePow.Size = new System.Drawing.Size(44, 18);
             this.lblLinePow.TabIndex = 201;
             this.lblLinePow.Text = "------";
             // 
@@ -479,7 +479,7 @@ namespace Tester01
             this.label7.Location = new System.Drawing.Point(744, 153);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(69, 18);
+            this.label7.Size = new System.Drawing.Size(58, 15);
             this.label7.TabIndex = 200;
             this.label7.Text = "Line Pow";
             // 
@@ -491,7 +491,7 @@ namespace Tester01
             this.lblDoorStat.Location = new System.Drawing.Point(637, 155);
             this.lblDoorStat.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDoorStat.Name = "lblDoorStat";
-            this.lblDoorStat.Size = new System.Drawing.Size(52, 24);
+            this.lblDoorStat.Size = new System.Drawing.Size(44, 18);
             this.lblDoorStat.TabIndex = 199;
             this.lblDoorStat.Text = "------";
             // 
@@ -503,7 +503,7 @@ namespace Tester01
             this.label8.Location = new System.Drawing.Point(516, 155);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(72, 18);
+            this.label8.Size = new System.Drawing.Size(58, 15);
             this.label8.TabIndex = 198;
             this.label8.Text = "Door Stat";
             // 
@@ -515,7 +515,7 @@ namespace Tester01
             this.lblRefTemp.Location = new System.Drawing.Point(637, 127);
             this.lblRefTemp.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblRefTemp.Name = "lblRefTemp";
-            this.lblRefTemp.Size = new System.Drawing.Size(52, 24);
+            this.lblRefTemp.Size = new System.Drawing.Size(44, 18);
             this.lblRefTemp.TabIndex = 197;
             this.lblRefTemp.Text = "------";
             // 
@@ -527,7 +527,7 @@ namespace Tester01
             this.label9.Location = new System.Drawing.Point(516, 127);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(98, 18);
+            this.label9.Size = new System.Drawing.Size(80, 15);
             this.label9.TabIndex = 196;
             this.label9.Text = "Ref Temp (C)";
             // 
@@ -539,7 +539,7 @@ namespace Tester01
             this.lblInt.Location = new System.Drawing.Point(744, 124);
             this.lblInt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblInt.Name = "lblInt";
-            this.lblInt.Size = new System.Drawing.Size(94, 18);
+            this.lblInt.Size = new System.Drawing.Size(78, 15);
             this.lblInt.TabIndex = 195;
             this.lblInt.Text = "In Temp1 (C)";
             // 
@@ -551,7 +551,7 @@ namespace Tester01
             this.lblInTemp.Location = new System.Drawing.Point(869, 124);
             this.lblInTemp.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblInTemp.Name = "lblInTemp";
-            this.lblInTemp.Size = new System.Drawing.Size(52, 24);
+            this.lblInTemp.Size = new System.Drawing.Size(44, 18);
             this.lblInTemp.TabIndex = 194;
             this.lblInTemp.Text = "------";
             // 
@@ -579,7 +579,7 @@ namespace Tester01
             // 
             // Senkronizasyon
             // 
-            this.Senkronizasyon.Location = new System.Drawing.Point(263, 130);
+            this.Senkronizasyon.Location = new System.Drawing.Point(261, 140);
             this.Senkronizasyon.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Senkronizasyon.Name = "Senkronizasyon";
             this.Senkronizasyon.Size = new System.Drawing.Size(229, 28);
@@ -606,6 +606,7 @@ namespace Tester01
             this.progressBar1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(700, 28);
+            this.progressBar1.Step = 8;
             this.progressBar1.TabIndex = 233;
             // 
             // ControlRichTextbox2

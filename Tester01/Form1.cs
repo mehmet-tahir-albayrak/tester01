@@ -49,6 +49,9 @@ namespace Tester01
 		int statusDebugIndex = 0;
 		bool ConnectBlink;
 		bool BlePeripheralConnected = false;
+		// vars from father
+		int TotalEventLogAmount;
+		int TotalDataLogAmount;
 		#endregion
 		#region
 		#endregion
@@ -1850,12 +1853,14 @@ namespace Tester01
 				{
 					SendCommand(VaccPort, Commands.UsbCmd, Commands.USB_GET_LOG_TABLE_LEN, 0, null);
 					System.Threading.Thread.Sleep(500);
-					ControlRichTextbox.Text = (Commands.USB_GET_DATA_LOG_TABLE_LEN.ToString());
+					
 
 					if (GetResponse(VaccPort, Commands.UsbCmd, Commands.USB_GET_LOG_TABLE_LEN, out logIndex, out rsp))
 					{
 						logIndex = BitConverter.ToInt32(rsp, 0);
 						logs = new JsonEventLog[logIndex];
+						TotalEventLogAmount = logIndex;
+						progressBar1.Maximum = TotalEventLogAmount * 4;
 						logIndex = 0;
 					}
 					SendCommand(VaccPort, Commands.UsbCmd, Commands.USB_GET_LOG_TABLE, 0, null);
@@ -1895,12 +1900,15 @@ namespace Tester01
 										return logIndex;
 									}
 									logs[logIndex++] = new JsonEventLog() { uid = UID, dateEpoch = epoch, logId = logID, logParam = logParam, logValue = logValue };
+									progressBar1.PerformStep();
 								}
 								timeout = 0;
+								
 							}
 						}
 						if (timeout++ > 10)
 							break;
+						
 					}
 				}
 				catch (Exception ex)
@@ -1935,8 +1943,8 @@ namespace Tester01
 
 			try
 			{
-				ControlRichTextbox.Text = ("GÖNDERİLEN LOG SAYISI :  " + (iLogLength).ToString());
-				ControlRichTextbox.AppendText(Text);
+				ControlRichTextbox.Text += ("GÖNDERİLEN LOG SAYISI :  " + (iLogLength).ToString());
+				
 				string access_token = getToken();
 				int balance = jsonDatas.Length % 8;
 				int j = ((jsonDatas.Length / 8) + (balance > 0 ? 1 : 0));
@@ -1998,7 +2006,12 @@ namespace Tester01
 				{
 					DatalogIndex = BitConverter.ToInt32(rsp, 0);
 					logs = new JsonDataLog[DatalogIndex];
+					TotalDataLogAmount = DatalogIndex;
+					progressBar1.Maximum = (2 * TotalEventLogAmount) + (2 * TotalDataLogAmount);
+					progressBar1.Value = progressBar1.Maximum / 2;
+					progressBar1.Step = 1;
 					DatalogIndex = 0;
+					ControlRichTextbox2.Text += "DATA LOGLAR ALINIYOR...";
 				}
 				else
 				{
@@ -2019,7 +2032,7 @@ namespace Tester01
 									Array.Copy(rsp, 8 * i, raw_data_log, 0, DATA_LOG_ENTRY_LEN);
 									Data_Log_parser(raw_data_log, out uint epoch, out int door_open, out int on_power, out double ref_temp, out double in_temp, out double ex_temp);
 									
-									ControlRichTextbox2.Text = (" GÖNDERİLEN DATA LOG SAYISI :  " + (logs.Length).ToString());
+									//ControlRichTextbox2.Text = (" GÖNDERİLEN DATA LOG SAYISI :  " + (logs.Length).ToString());
 									logs[DatalogIndex++] = new JsonDataLog()
 									{
 										deviceUid = UID,
@@ -2052,6 +2065,7 @@ namespace Tester01
 
 								}
 								timeout = 0;
+								progressBar1.PerformStep();
 							}
 
 						}
@@ -2165,7 +2179,7 @@ namespace Tester01
 							if (GetResponse(VaccPort, Commands.UsbCmd, Commands.USB_GET_LOG_TABLE, out rsp, out length))
 							{
 
-							ControlRichTextbox.Text = ( "GÖNDERİLEN LOG SAYISI :  " +(length / 6).ToString()  ) ;
+							ControlRichTextbox.Text += ( "GÖNDERİLEN LOG SAYISI :  " +(length / 6).ToString()  ) ;
 							timeout = 0;
 							}
 						}
@@ -2192,15 +2206,18 @@ namespace Tester01
 
         private void Senkronizasyon_Click(object sender, EventArgs e)
         {
+			ControlRichTextbox.Text += "EVENT LOGLAR ALINIYOR";
 			JsonPost2();
-			//ControlRichTextbox.Text = "EVENT LOGLAR ALINIYOR";
-			//progressBar1.Value = 10;
-			//ControlRichTextbox.Text = "EVETN LOGLAR GÖNDERİLDİ";
-			//progressBar1.Value = 50;
-			
-			//JsonDataPost2();
-			//progressBar1.Value = 70;
-			//ControlRichTextbox2.Text = "DATA LOGLAR ALINIYOR";
+
+            JsonDataPost2();
+            //progressBar1.Value = 10;
+            //ControlRichTextbox.Text = "EVETN LOGLAR GÖNDERİLDİ";
+            //progressBar1.Value = 50;
+
+            
+            //progressBar1.Value = 70;
+            //ControlRichTextbox2.Text = "DATA LOGLAR ALINIYOR";
+
         }
 		private void JsonDataPost2()
         {
@@ -2218,8 +2235,9 @@ namespace Tester01
 			{
 				//ControlRichTextbox.AppendText(Text);
 				
-				//ControlRichTextbox.Text = (" DATA LOG SAYISI :  " + (jsonDatas).ToString());
-				
+				ControlRichTextbox.Text += (" DATA LOG SAYISI :  " + (iLogLength).ToString());
+				ControlRichTextbox.Text += " DATA LOGLAR GÖNDERİLİYOR...";
+
 				int balance = jsonDatas.Length % 16;
 				int j = ((jsonDatas.Length / 16) + (balance > 0 ? 1 : 0));
 				string access_token = getToken(); 
@@ -2257,18 +2275,21 @@ namespace Tester01
 
 						}
 					}
+					progressBar1.PerformStep();
 				}
 			}
 			catch (Exception ex)
 			{
 
 			}
+			ControlRichTextbox.Text += " DATA LOGLAR GÖNDERİLDİ!";
+			
 		}
 		private void JsonPost2()
 		{
 			JsonEventLog[] jsonDatas;
 
-			progressBar1.Value = 50;
+			//progressBar1.Value = 50;
 			int iLogLength2 = GetEventsLogs(out jsonDatas);
 
 			System.Threading.Thread.Sleep(1000);
@@ -2280,7 +2301,8 @@ namespace Tester01
 
 			try
 			{
-				ControlRichTextbox.Text = ("GÖNDERİLEN LOG SAYISI :  " + (iLogLength2).ToString());
+				ControlRichTextbox.Text += ("GÖNDERİLEN LOG SAYISI :  " + (iLogLength2).ToString());
+				ControlRichTextbox.Text += "EVENT LOGLAR GÖNDERİLİYOR...";
 				//ControlRichTextbox.AppendText(Text);
 
 				string access_token = getToken();
@@ -2319,9 +2341,10 @@ namespace Tester01
 						var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
 
 					}
+					progressBar1.PerformStep();
 				}
-				ControlRichTextbox2.Text = "DATA LOGLAR GÖNDERİLDİ";
-				progressBar1.Value = 100;
+				ControlRichTextbox2.Text = "EVENT LOGLAR GÖNDERİLDİ";
+				//progressBar1.Value = 100;
 			}
 			
 			catch (Exception ex)
